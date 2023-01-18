@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cf9f1a849434584480f06f721e7db45, type: 3}
+  m_Name: AK
+  m_EditorClassIdentifier: 
+  _weaponName: AK-47
+  _weaponType: 0
+  _bulletType: 1
+  _fireingType: 2
+  _magSize: 50
+  _bulletsPerMinute: 600
+  _reloadTime: 1.3
+  bulletDamage: 31
+  _bullet: {fileID: 3805629993426350107, guid: 10733f2706268f34c9eea2e9dcaf57d4, type: 3}
+  _muzzleFlash: {fileID: 1252424093267096, guid: fede7bedd0d852844a42392d0db8e8a7, type: 3}
+  _rayCastDetection: {fileID: 147653301602924839, guid: 9ce345c02d0e3b24c904e2bdf3d612b6, type: 3}
+  _handPosition: {x: 0, y: 0, z: 0}
+  _handRotation: {x: 0, y: 0, z: 0}
+  enemyVitalImpactSFX: {fileID: 8300000, guid: 01752a774bdd44a418e86b44b2c831ed, type: 3}
+  enemyImpactSFX: {fileID: 8300000, guid: c9b28256f4404344c941a375c3af0178, type: 3}
+  upwardsRecoil: 2
+  sidewaysRecoil: 0.6
+  timeBetweenShots: 0.1
+  canShoot: 1
+  _bulletsInMag: 26
+  headshotMultiplier: 2
