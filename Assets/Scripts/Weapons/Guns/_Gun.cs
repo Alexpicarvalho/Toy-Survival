@@ -35,6 +35,7 @@ public class _Gun : ScriptableObject
     [Header("Recoil Properties")]
     [SerializeField] public float upwardsRecoil;
     [SerializeField] public float sidewaysRecoil;
+    [SerializeField] private float jumpingRecoil;
 
     #region Internal Variables
     [Header("Internal Variables")]
@@ -44,6 +45,7 @@ public class _Gun : ScriptableObject
     [SerializeField] private float headshotMultiplier;
     Camera _camera;
     CameraController camController;
+    private Animator _animator;
     #endregion
 
     public virtual void SetVariables(Camera cam, GameObject firePoint)
@@ -51,24 +53,26 @@ public class _Gun : ScriptableObject
         _camera = cam;
         camController = cam.GetComponent<CameraController>();
         timeBetweenShots = 60.0f / _bulletsPerMinute;
+        _animator = cam.GetComponentInChildren<Animator>();
         Debug.Log("Time Between Shots: " + timeBetweenShots);
         _firePoint = firePoint;
         canShoot = true;
         _bulletsInMag = _magSize;
     }
-    public virtual void Shoot()
+    public virtual void Shoot(bool jumping)
     {
         if (!canShoot) return;
 
         switch (_bulletType)
         {
             case BulletType.Projectile:
-                ShootProjectile();
+                ShootProjectile(jumping);
                 break;
             case BulletType.Raycast:
-                ShootRaycast();
+                ShootRaycast(jumping);
                 break;
         }
+        if (_animator) _animator.SetTrigger("Fire");
         ApplyRecoil();
         var mf = Instantiate(_muzzleFlash, _firePoint.transform.position, Quaternion.identity);
         mf.transform.parent = _firePoint.transform;
@@ -77,11 +81,15 @@ public class _Gun : ScriptableObject
         _bulletsInMag--;
     }
 
-    private void ShootProjectile()
+    private void ShootProjectile(bool jumping)
     {
-        Instantiate(_bullet, _firePoint.transform.position, Quaternion.LookRotation(_camera.transform.forward));
+        var bullet = Instantiate(_bullet, _firePoint.transform.position, Quaternion.LookRotation(_camera.transform.forward));
+        if(jumping) bullet.transform.Rotate(new Vector3(
+            Random.Range(-jumpingRecoil,jumpingRecoil),
+            Random.Range(-jumpingRecoil, jumpingRecoil), 
+            Random.Range(-jumpingRecoil, jumpingRecoil)));
     }
-    private void ShootRaycast()
+    private void ShootRaycast(bool jumping)
     {
         Ray ray = new Ray(_camera.transform.position, _camera.transform.forward);
         RaycastHit hit;

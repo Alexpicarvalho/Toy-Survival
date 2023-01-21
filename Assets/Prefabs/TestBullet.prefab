@@ -135,6 +135,7 @@ MonoBehaviour:
   weaponDropOffStartTime: 0.3
   weaponDropOffEndTime: 1
   hitPoint: {x: 0, y: 0, z: 0}
+  headshotMultiplier: 2
   enemyImpactVFX: {fileID: 1252424093267096, guid: bd93fa97826dd774eb7a2656d234d733, type: 3}
   nonEnemyImpactVFX: {fileID: 0}
   enemyImpactSFX: {fileID: 8300000, guid: c9b28256f4404344c941a375c3af0178, type: 3}

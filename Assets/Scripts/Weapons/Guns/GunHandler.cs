@@ -13,7 +13,9 @@ public class GunHandler : MonoBehaviour
 
     private float yRecoil;
     private float xRecoil;
-    
+
+    bool jumpingInnacuracy = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +30,7 @@ public class GunHandler : MonoBehaviour
     {
         if (Input.GetButton("Fire1"))
         {
-            _currentGun.Shoot();
+            _currentGun.Shoot(jumpingInnacuracy);
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -38,14 +40,11 @@ public class GunHandler : MonoBehaviour
 
         if (!_playerController.playerController.isGrounded)
         {
-            Debug.Log("TUKTUK");
-            _currentGun.sidewaysRecoil = _xRecoilWhileJumping;
-            _currentGun.upwardsRecoil = _yRecoilWhileJumping;
+            jumpingInnacuracy = true;
         }
         else
         {
-            _currentGun.sidewaysRecoil = xRecoil;
-            _currentGun.upwardsRecoil = yRecoil;
+            jumpingInnacuracy = false;
         }
 
     }

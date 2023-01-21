@@ -21,8 +21,9 @@ public class PewPew : MonoBehaviour
 
     private void Start()
     {
+        left = true;
         firePoint1 = transform.GetChild(0).gameObject;
-        firePoint2 = transform.GetChild(1).gameObject;
+        //firePoint2 = transform.GetChild(1).gameObject;
         timeSinceLastShot = fireRate;
         currentBulletAmount = magSize;
         //StartCoroutine(StartDelay());
@@ -53,15 +54,15 @@ public class PewPew : MonoBehaviour
             Instantiate(enemyBullet, firePoint1.transform.position, Quaternion.LookRotation(transform.forward));
             timeSinceLastShot = 0;
             currentBulletAmount--;
-            left = false;
+            //left = false;
         }
-        else
-        {
-            Instantiate(enemyBullet, firePoint2.transform.position, Quaternion.LookRotation(transform.forward));
-            timeSinceLastShot = 0;
-            currentBulletAmount--;
-            left = true;
-        }
+        //else
+        //{
+        //    Instantiate(enemyBullet, firePoint2.transform.position, Quaternion.LookRotation(transform.forward));
+        //    timeSinceLastShot = 0;
+        //    currentBulletAmount--;
+        //    left = true;
+        //}
         
     }
 
