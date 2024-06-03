@@ -9,6 +9,7 @@ public class Gun : MonoBehaviour
     [Header("Weapon Properties")]
     [SerializeField] private float dmgModifier;
     [SerializeField] private FireType fireType;
+    [SerializeField] private RecoilType recoilType;
     [SerializeField] private float fireRate;
     [SerializeField] private GameObject bullet;
     [SerializeField] private GameObject firePoint;
@@ -35,7 +36,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private GameObject muzzleFlash;
 
     private enum FireType { manual, semiAutomatic, fullAutomatic }
-
+    private enum RecoilType { camera, weapon}
 
     private Recoil recoil_Script;
 

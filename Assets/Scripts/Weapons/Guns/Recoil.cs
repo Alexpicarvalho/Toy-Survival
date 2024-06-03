@@ -33,6 +33,6 @@ public class Recoil : MonoBehaviour
 
     public void RecoilFire()
     {
-        targetRotation += new Vector3(recoilX, Random.Range(-recoilY,recoilY), Random.Range(-recoilZ,recoilZ));
+        targetRotation += new Vector3(-recoilX, Random.Range(-recoilY,recoilY), Random.Range(-recoilZ,recoilZ));
     }
 }

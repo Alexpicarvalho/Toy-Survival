@@ -14,15 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponName: AK-47
   _weaponType: 0
-  _bulletType: 0
+  _bulletType: 1
   _fireingType: 2
+  _recoilType: 1
   _magSize: 50
-  _bulletsPerMinute: 190
+  _bulletsPerMinute: 600
   _reloadTime: 1.3
   bulletDamage: 31
   _bullet: {fileID: 3805629993426350107, guid: 10733f2706268f34c9eea2e9dcaf57d4, type: 3}
   _muzzleFlash: {fileID: 1252424093267096, guid: fede7bedd0d852844a42392d0db8e8a7, type: 3}
-  _rayCastDetection: {fileID: 147653301602924839, guid: 9ce345c02d0e3b24c904e2bdf3d612b6, type: 3}
+  _rayCastDetection: {fileID: 1903522215306960717, guid: 921dd74f1f9c03749a315e65194bca6b, type: 3}
   _handPosition: {x: 0, y: 0, z: 0}
   _handRotation: {x: 0, y: 0, z: 0}
   enemyVitalImpactSFX: {fileID: 8300000, guid: 01752a774bdd44a418e86b44b2c831ed, type: 3}
@@ -30,7 +31,7 @@ MonoBehaviour:
   upwardsRecoil: 2
   sidewaysRecoil: 0.6
   jumpingRecoil: 5
-  timeBetweenShots: 0.31578946
+  timeBetweenShots: 0.1
   canShoot: 1
-  _bulletsInMag: 35
+  _bulletsInMag: 48
   headshotMultiplier: 2

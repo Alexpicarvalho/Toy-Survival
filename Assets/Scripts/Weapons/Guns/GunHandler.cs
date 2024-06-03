@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using System;
 
 public class GunHandler : MonoBehaviour
 {
@@ -10,6 +12,8 @@ public class GunHandler : MonoBehaviour
 
     [SerializeField] private float _xRecoilWhileJumping;
     [SerializeField] private float _yRecoilWhileJumping;
+    [SerializeField] private TextMeshProUGUI _ammoText;
+    [SerializeField] private Gradient _ammoGradient;
 
     private float yRecoil;
     private float xRecoil;
@@ -47,8 +51,18 @@ public class GunHandler : MonoBehaviour
             jumpingInnacuracy = false;
         }
 
+        ColorText();
+        _ammoText.text = _currentGun._bulletsInMag.ToString() + "/" + _currentGun._magSize;
+
     }
 
+    private void ColorText()
+    {
+        float ratio = (float)_currentGun._bulletsInMag / (float)_currentGun._magSize;
+        Debug.Log(ratio);
+        _ammoText.color = _ammoGradient.Evaluate(ratio);
+ 
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

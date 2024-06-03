@@ -15,6 +15,7 @@ public class _Gun : ScriptableObject
     [SerializeField] GunType _weaponType;
     [SerializeField] BulletType _bulletType;
     [SerializeField] FireingType _fireingType;
+    [SerializeField] RecoilType _recoilType;
     [SerializeField] public int _magSize;
     [SerializeField] int _bulletsPerMinute;
     [SerializeField] public float _reloadTime;
@@ -46,12 +47,14 @@ public class _Gun : ScriptableObject
     Camera _camera;
     CameraController camController;
     private Animator _animator;
+    private Recoil _recoilScript;
     #endregion
 
     public virtual void SetVariables(Camera cam, GameObject firePoint)
     {
         _camera = cam;
         camController = cam.GetComponent<CameraController>();
+        _recoilScript = firePoint.GetComponentInParent<Recoil>();
         timeBetweenShots = 60.0f / _bulletsPerMinute;
         _animator = cam.GetComponentInChildren<Animator>();
         Debug.Log("Time Between Shots: " + timeBetweenShots);
@@ -96,7 +99,7 @@ public class _Gun : ScriptableObject
 
         if (Physics.Raycast(ray, out hit))
         {
-            Instantiate(_rayCastDetection, hit.point, Quaternion.identity);
+            Instantiate(_rayCastDetection, hit.point, Quaternion.LookRotation(hit.normal));
             IDamageable enemy = hit.collider.GetComponentInParent<IDamageable>();
             if (enemy != null)
             {
@@ -124,11 +127,23 @@ public class _Gun : ScriptableObject
 
     private void ApplyRecoil()
     {
-        camController.xRotation -= upwardsRecoil;
-        camController.playerBody.Rotate(Vector3.up * Random.Range(-sidewaysRecoil, sidewaysRecoil));
+        switch (_recoilType)
+        {
+            case RecoilType.Camera:
+                camController.xRotation -= upwardsRecoil;
+                camController.playerBody.Rotate(Vector3.up * Random.Range(-sidewaysRecoil, sidewaysRecoil));
+                break;
+            case RecoilType.Weapon:
+                _recoilScript.RecoilFire();
+                break;
+            default:
+                break;
+        }
+        
     }
 }
 
 public enum GunType { Rifle, SniperRifle, Pistol, Shotgun }
 public enum BulletType { Projectile, Raycast }
 public enum FireingType { Manual, SemiAutomatic, FullAutomatic }
+public enum RecoilType { Camera, Weapon}
